@@ -21,5 +21,8 @@
     "dependencies": {
         "ziggy": "^2.4.0",
         "ziggy-js": "github:tightenco/ziggy"
+    },
+    "engines": {
+        "node": ">=14.0.0"
     }
 }
