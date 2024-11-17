@@ -10,7 +10,7 @@ export default defineConfig({
     },
     server: {
         host: "0.0.0.0", // Bind to all interfaces
-        port: process.env.PORT || 5173, // Use Render's port or fallback to default 5173
+        port: process.env.PORT || 10000, // Use Render's port or fallback to default 5173
         strictPort: true, // Ensures Vite uses the specified port
     },
     plugins: [
