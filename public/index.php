@@ -1,17 +1,16 @@
-<?php
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laravel</title>
+</head>
+<body>
+    <div id="app">
+        <!-- Your existing content -->
 
-use Illuminate\Http\Request;
+        <!-- Add link to Dashboard -->
+        <a href="{{ route('dashboard') }}">Go to Dashboard</a>
+    </div>
 
-define('LARAVEL_START', microtime(true));
-
-// Determine if the application is in maintenance mode...
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
-    require $maintenance;
-}
-
-// Register the Composer autoloader...
-require __DIR__.'/../vendor/autoload.php';
-
-// Bootstrap Laravel and handle the request...
-(require_once __DIR__.'/../bootstrap/app.php')
-    ->handleRequest(Request::capture());
+    <script src="{{ mix('js/app.js') }}"></script>
+</body>
+</html>
