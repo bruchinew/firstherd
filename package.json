@@ -19,6 +19,7 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "ziggy": "^2.4.0",
         "ziggy-js": "github:tightenco/ziggy"
     }
 }
