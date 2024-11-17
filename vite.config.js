@@ -10,8 +10,8 @@ export default defineConfig({
     },
     server: {
         host: "0.0.0.0", // Bind to all interfaces
-        port: 5173, // You can change the port if needed
-        strictPort: true, // Ensures the server uses the specified port
+        port: process.env.PORT || 5173, // Use Render's port or fallback to default 5173
+        strictPort: true, // Ensures Vite uses the specified port
     },
     plugins: [
         laravel({
