@@ -3,6 +3,9 @@ import laravel from "laravel-vite-plugin";
 import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
+    build: {
+        outDir: "public/build",
+    },
     resolve: {
         alias: {
             ziggy: "node_modules/ziggy", // Ensure Ziggy is resolved correctly
