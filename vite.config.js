@@ -3,6 +3,7 @@ import laravel from "laravel-vite-plugin";
 import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
+    base: "/",
     build: {
         outDir: "public/build",
     },
@@ -12,9 +13,13 @@ export default defineConfig({
         },
     },
     server: {
-        host: "0.0.0.0", // Bind to all interfaces
-        port: process.env.PORT || 10000, // Use Render's port or fallback to default 5173
+        host: "0.0.0.0", // Bind to all interfaces (use 'localhost' for local dev)
+        port: process.env.PORT || 5173, // Use Render's port or fallback to 5173
         strictPort: true, // Ensures Vite uses the specified port
+        hmr: {
+            protocol: "ws", // WebSocket protocol for HMR
+            host: "localhost", // Change this if working on a remote server
+        },
     },
     plugins: [
         laravel({
