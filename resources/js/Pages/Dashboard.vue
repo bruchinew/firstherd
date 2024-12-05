@@ -13,11 +13,16 @@
             Reset
         </button>
         <button @click="enlarge">bigger</button>
+        <br />
+        <button class="border bg-red-300">
+            <a :href="route('users.index')">go to users</a>
+        </button>
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, watch } from "vue";
+import { route } from "ziggy-js";
 
 class snakeFood {
     constructor(x, y) {
