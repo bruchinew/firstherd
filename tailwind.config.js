@@ -15,6 +15,9 @@ export default {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                mustard: "#ceaf4c",
+            },
             transitionDelay: {
                 750: "750ms",
                 800: "800ms",

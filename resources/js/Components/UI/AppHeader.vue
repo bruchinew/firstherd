@@ -1,182 +1,80 @@
 <template>
-    <nav class="bg-gray-100/90 sticky group top-0 w-full left-0 z-50 blur-none">
+    <nav class="bg-gray-100/90 sticky top-0 w-full left-0 z-50 blur-none">
         <div class="flex items-center justify-center">
             <ul
-                class="flex text-xs justify-evenly mx-56 content-center items-center justify-items-center w-full"
+                class="flex text-xs justify-evenly content-center items-center justify-items-center w-full"
             >
-                <img src="/images/logo.png" class="h-7" />
-
-                <li
-                    class="group group-hover:translate-y-52 transition-all duration-1000 ease-in-out group-hover:bg-gray-100 rounded-lg w-full fixed space-x-3 p-12 translate-y-[-100%] group-hover:block delay-150"
+                <div class="flex space-x-2">
+                    <img src="/images/logo.png" class="h-16" />
+                    <img src="/images/wording.png" class="h-16" />
+                </div>
+                <!-- <li
+                    class="group group-hover:translate-y-36 transition-all duration-1000 ease-in-out group-hover:bg-gray-100 rounded-lg w-full fixed space-x-3 p-12 translate-y-[-100%] group-hover:block delay-150"
                 >
                     <ul>
-                        <li class="grid grid-cols-3 gap-9">
+                        <li class="flex">
                             <div class="text-xl font-bold space-y-2 group">
                                 <h1
                                     class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-700"
                                 >
-                                    Shop
+                                    Household Insurance
                                 </h1>
                                 <a
                                     href="#"
                                     class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-750"
-                                    >Shop the Latest</a
+                                    >LandLord Insurance</a
                                 >
                                 <a
                                     href="#"
                                     class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-800"
-                                    >Mac</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-850"
-                                    >iPad</a
+                                    >Public Liability</a
                                 >
                                 <a
                                     href="#"
                                     class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-900"
-                                    >iPhone</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-950"
-                                    >Apple Watch</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-1000"
-                                    >Apple Vision Pro</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-1050"
-                                    >Accessories</a
-                                >
-                            </div>
-
-                            <div class="group">
-                                <h1
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-700"
-                                >
-                                    Quick links
-                                </h1>
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-750"
-                                >
-                                    Shop the Latest
-                                </a>
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-800"
-                                >
-                                    Shop the Latest
-                                </a>
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-850"
-                                    >Mac</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-900"
-                                    >iPad</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-950"
-                                    >iPhone</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-1000"
-                                    >Apple Watch</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-1050"
-                                    >Apple Vision Pro</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-1100"
-                                    >Accessories</a
-                                >
-                            </div>
-
-                            <!-- Another child with transition properties -->
-                            <div class="group">
-                                <h1
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-700"
-                                >
-                                    Quick links
-                                </h1>
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-750"
-                                >
-                                    Shop the Latest
-                                </a>
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-800"
-                                >
-                                    Shop the Latest
-                                </a>
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-850"
-                                    >Mac</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-900"
-                                    >iPad</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-950"
-                                    >iPhone</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-1000"
-                                    >Apple Watch</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-1050"
-                                    >Apple Vision Pro</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in-out delay-1100"
-                                    >Accessories</a
+                                    >Commercial Insurance</a
                                 >
                             </div>
                         </li>
                     </ul>
+                </li> -->
+                <li>
+                    <div
+                        href="#"
+                        class="hover:text-blue-500 relative group/house z-0"
+                    >
+                        Our products
+                        <div
+                            class="group z-0 group-hover/house:translate-y-4 w-screen transition-all duration-1000 ease-in-out group-hover/house:bg-gray-100 rounded-lg fixed space-x-3 p-12 translate-y-[-100%] left-0 group-hover/house:block delay-150 flex justify-between"
+                        >
+                            <a
+                                :href="route('apple.index')"
+                                class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in delay-750"
+                                >LandLord Insurance</a
+                            >
+                            <a
+                                href="#"
+                                class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in delay-800"
+                                >Public Liability</a
+                            >
+                            <a
+                                href="#"
+                                class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in delay-900"
+                                >Commercial Insurance</a
+                            >
+                        </div>
+                    </div>
                 </li>
 
-                <a href="#" class="hover:text-blue-500 group/store sticky"
-                    >Store
-                </a>
-                <li><a href="#" class="hover:text-blue-500">ipad</a></li>
-                <li><a href="#" class="hover:text-blue-500">iphone</a></li>
-                <li><a href="#" class="hover:text-blue-500">Watch</a></li>
-                <li><a href="#" class="hover:text-blue-500">vision</a></li>
-                <li><a href="#" class="hover:text-blue-500">Airpods</a></li>
-                <li>
-                    <a href="#" class="hover:text-blue-500">TV & Home</a>
+                <li class="z-50">
+                    <a href="#" class="hover:text-blue-500 "> Claims</a>
                 </li>
-                <li>
-                    <a href="#" class="hover:text-blue-500">Entertainment</a>
+                <li class="z-50">
+                    <a href="#" class="hover:text-blue-500 ">Support</a>
+                </li class="z-50">
+                <li class="z-50">
+                    <a href="#" class="hover:text-blue-500 ">About Us</a>
                 </li>
-
-                <li>
-                    <a href="#" class="hover:text-blue-500">Accessories</a>
-                </li>
-                <li><a href="#" class="hover:text-blue-500">Support</a></li>
                 <li>
                     <a href="#" class="hover:text-blue-500">
                         <svg
@@ -192,18 +90,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="hover:text-blue-500">
-                        <svg
-                            height="44"
-                            viewBox="0 0 14 44"
-                            width="14"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                d="m11.3535 16.0283h-1.0205a3.4229 3.4229 0 0 0 -3.333-2.9648 3.4229 3.4229 0 0 0 -3.333 2.9648h-1.02a2.1184 2.1184 0 0 0 -2.117 2.1162v7.7155a2.1186 2.1186 0 0 0 2.1162 2.1167h8.707a2.1186 2.1186 0 0 0 2.1168-2.1167v-7.7155a2.1184 2.1184 0 0 0 -2.1165-2.1162zm-4.3535-1.8652a2.3169 2.3169 0 0 1 2.2222 1.8652h-4.4444a2.3169 2.3169 0 0 1 2.2222-1.8652zm5.37 11.6969a1.0182 1.0182 0 0 1 -1.0166 1.0171h-8.7069a1.0182 1.0182 0 0 1 -1.0165-1.0171v-7.7155a1.0178 1.0178 0 0 1 1.0166-1.0166h8.707a1.0178 1.0178 0 0 1 1.0164 1.0166z"
-                            ></path>
-                        </svg>
-                    </a>
+                    <button href="#" class="bg-mustard p-3 text-md rounded-xl">
+                        Log in
+                    </button>
                 </li>
             </ul>
         </div>
