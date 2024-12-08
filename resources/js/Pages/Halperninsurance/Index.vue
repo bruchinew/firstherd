@@ -64,8 +64,20 @@
                                 Safeguard your home and belongings with
                                 comprehensive cover.
                             </p>
-                            <button></button>
                         </h1>
+                        <div class="justify-center space-x-7 flex p-3">
+                            <button
+                                class="bg-white text-black border-blue-500 border rounded-3xl px-6 py-2 text-md"
+                            >
+                                Learn more
+                            </button>
+                            <a
+                                :href="route('quote.index')"
+                                class="border-white text-white border rounded-3xl px-6 py-2 hover:bg-white hover:text-black"
+                            >
+                                Quote
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
