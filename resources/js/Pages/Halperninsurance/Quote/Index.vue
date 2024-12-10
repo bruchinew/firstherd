@@ -105,6 +105,37 @@
                                     validation="required"
                                     type="date"
                                 />
+                                <FormKit
+                                    name="build_date"
+                                    label="Build date"
+                                    validation="required"
+                                    type="date"
+                                />
+                            </div>
+                        </div>
+
+                        <div
+                            class="p-4 m-6 border border-black bg-gray-200 rounded-xl"
+                        >
+                            <div class="justify-between grid grid-cols-3">
+                                <FormKit
+                                    name="number_of_rooms"
+                                    label="Number of rooms"
+                                    validation="required"
+                                    type="number"
+                                />
+                                <FormKit
+                                    name="build_date"
+                                    label="Build date"
+                                    validation="required"
+                                    type="date"
+                                />
+                                <FormKit
+                                    name="build_date"
+                                    label="Build date"
+                                    validation="required"
+                                    type="date"
+                                />
                             </div>
                         </div>
                         <FormKit type="submit" label="Register" />
