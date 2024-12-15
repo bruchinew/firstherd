@@ -56,24 +56,42 @@
                 class="bg-local bg-center bg-no-repeat bg-cover h-screen rounded-xl"
                 style="background-image: url('images/Home.jpg')"
             >
-                <div class="justify-center p-16 flex">
-                    <div>
-                        <h1 id="heading" class="heading">
-                            Home Insurance
-                            <p id="subheading" class="">
-                                Safeguard your home and belongings with
-                                comprehensive cover.
-                            </p>
-                        </h1>
-                        <div class="justify-center space-x-7 flex p-3">
-                            <button
-                                class="bg-white text-black border-blue-500 border rounded-3xl px-6 py-2 text-md"
+                <div class="justify-center p-10 flex">
+                    <div class="p-3 rounded-lg mb-80 grid grid-cols-3">
+                        <div>
+                            <h1 id="heading" class="heading">
+                                Home Insurance
+                                <p id="subheading" class="">
+                                    Safeguard your home and belongings with
+                                    comprehensive cover.
+                                </p>
+                            </h1>
+                            <p
+                                class="font-serif text-xxs md:text-md lg:text-xl backdrop-blur p-3"
                             >
-                                Learn more
-                            </button>
+                                At Halpern Insurance, we offer home insurance
+                                that protects your property, belongings, and
+                                personal liability against risks like fire,
+                                theft, and natural disasters. Our policies are
+                                tailored to meet your needs, covering everything
+                                from your home's structure to your personal
+                                possessions. We also offer liability coverage,
+                                protecting you if accidents occur on your
+                                property. With flexible options and competitive
+                                rates, we ensure your home is secure in any
+                                situation. Our goal is to provide peace of mind
+                                so you can focus on what matters. Trust Halpern
+                                Insurance to keep your home protected.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div
+                            class="absolute bottom-44 -left-44 animate-bounce w-16 h-16"
+                        >
                             <a
                                 :href="route('quote.index')"
-                                class="border-white text-white border rounded-3xl px-6 py-2 hover:bg-white hover:text-black"
+                                class="border-white text-white border-2 font-serif text-3xl rounded-3xl px-7 py-2 hover:bg-white hover:text-black"
                             >
                                 Quote
                             </a>
@@ -82,96 +100,155 @@
                 </div>
             </div>
         </section>
-        <section class="pb-5 grid grid-cols-3">
+        <section class="pb-5">
             <div
                 class="bg-local bg-center bg-no-repeat bg-cover h-screen col-span-2 rounded-xl"
                 style="background-image: url('images/commercial.jpg')"
             >
-                <div class="flex justify-center p-16">
-                    <div>
-                        <h1 id="heading" class="heading text-white">
-                            Commercial insurance
-                            <p id="subheading" class="text-white">
-                                Secure your business with flexible and reliable
-                                coverage.
-                            </p>
-                        </h1>
-                    </div>
-                </div>
-            </div>
-            <div>
-                By working with leading insurers, we’re able to offer
-                competitive premiums while maintaining the highest standards of
-                service. At Halpern Insurance Services, you can expect personal
-                attention from our team of experienced professionals who are
-                always ready to provide tailored advice — no call centres or
-                automated systems. We understand the importance of protecting
-                what matters most to you, which is why we focus on making the
-                insurance process as simple and straightforward as possible.
-                Whether you prefer to meet face-to-face or speak with us by
-                phone, we’re here to help you find the best coverage without any
-                hassle. Get in touch with our friendly team today to discuss
-                your insurance needs. Call Halpern Insurance Services on 020
-                8800 1211.
-            </div>
-        </section>
-        <section class="pb-5 grid grid-cols-3">
-            <div>wefdw</div>
-            <div
-                class="bg-local bg-center bg-no-repeat bg-cover h-screen col-span-2 rounded-xl"
-                style="background-image: url('images/terraced.jpg')"
-            >
-                <div class="flex justify-center p-16">
-                    <div>
-                        <h1 id="heading" class="heading text-white">
-                            Landlords insurance
-                            <p id="subheading" class="text-white">
-                                Tailored protection for property owners and
-                                rental income.
-                            </p>
-                        </h1>
-                        <div class="justify-center space-x-7 flex p-3">
-                            <button
-                                class="bg-white text-black border-blue-500 border rounded-3xl px-6 py-2 text-lg"
+                <div class="justify-center p-10 flex">
+                    <div class="p-3 rounded-lg mb-80 grid grid-cols-3">
+                        <div></div>
+                        <div></div>
+                        <div>
+                            <h1 id="heading" class="heading text-white">
+                                Commercial insurance
+                                <p id="subheading" class="text-white">
+                                    Secure your business with flexible and
+                                    reliable coverage.
+                                </p>
+                            </h1>
+                            <p
+                                class="font-serif text-white text-xxs md:text-md lg:text-xl backdrop-blur p-3"
                             >
-                                Learn more
-                            </button>
-                            <button
-                                class="border-white text-white border rounded-3xl px-6 py-2 hover:bg-white hover:text-black"
+                                Halpern Insurance offers commercial insurance
+                                tailored to protect your business from property
+                                damage, liability claims, and operational
+                                disruptions. We cover everything from equipment
+                                loss to employee injuries and business
+                                interruption. Our policies are customized for
+                                your industry, ensuring you have the right
+                                coverage. We also offer professional liability
+                                protection for businesses offering services.
+                                With flexible packages and competitive rates, we
+                                help businesses of all sizes manage risk. Let
+                                Halpern Insurance protect your business, so you
+                                can focus on growth.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div
+                            class="absolute bottom-44 -left-44 animate-bounce w-16 h-16"
+                        >
+                            <a
+                                :href="route('quote.index')"
+                                class="border-white text-white border-2 font-serif text-3xl rounded-3xl px-7 py-2 hover:bg-white hover:text-black"
                             >
                                 Quote
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="pb-5 grid grid-cols-3">
+        <section class="pb-5">
             <div
-                class="bg-local bg-center bg-no-repeat bg-cover h-screen col-span-2 rounded-xl"
-                style="background-image: url('/images/workers.jpg')"
+                class="bg-local bg-center bg-no-repeat bg-cover h-screen rounded-xl"
+                style="background-image: url('images/terraced.jpg')"
             >
-                <div class="flex justify-center p-16">
-                    <div>
-                        <h1 id="heading" class="heading">
-                            Public Liability
-
-                            <p id="subheading">
-                                Protect your business from third-party claims
-                                and risks.
-                            </p>
-                        </h1>
-                        <div class="justify-center space-x-7 flex p-3">
-                            <button
-                                class="bg-white text-black border-blue-500 border rounded-3xl px-6 py-2 text-lg"
+                <div class="justify-center p-10 flex">
+                    <div class="p-3 rounded-lg mb-80">
+                        <div>
+                            <h1 id="heading" class="heading text-white">
+                                Landlords insurance
+                                <p id="subheading" class="text-white">
+                                    Tailored protection for property owners and
+                                    rental income.
+                                </p>
+                            </h1>
+                            <p
+                                class="font-serif text-white text-xxs md:text-md lg:text-xl backdrop-blur p-3"
                             >
-                                Learn more
-                            </button>
-                            <button
-                                class="border-white text-white border rounded-3xl px-6 py-2 hover:bg-white hover:text-black"
+                                Our landlord insurance is designed to protect
+                                rental property owners against risks such as
+                                property damage, tenant-related issues, and loss
+                                of rent. We offer customized coverage for both
+                                residential and commercial properties, ensuring
+                                you're financially protected. Our policies also
+                                cover legal expenses related to tenant disputes
+                                and eviction. Additionally, we provide loss of
+                                rent protection and contents coverage for
+                                furnished properties. With flexible options and
+                                expert support, we ensure landlords are covered
+                                in every situation. Trust Halpern Insurance to
+                                safeguard your rental investments.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div
+                            class="absolute -bottom-32 -left-44 animate-bounce w-16 h-16"
+                        >
+                            <a
+                                :href="route('quote.index')"
+                                class="border-white text-white border-2 font-serif text-3xl rounded-3xl px-7 py-2 hover:bg-white hover:text-black"
                             >
                                 Quote
-                            </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pb-5">
+            <div
+                class="bg-local bg-center bg-no-repeat bg-cover h-screen rounded-xl"
+                style="background-image: url('/images/workers.jpg')"
+            >
+                <div class="justify-center p-10 flex">
+                    <div class="p-3 rounded-lgc grid grid-rows-2">
+                        <div>
+                            <div>
+                                <h1 id="heading" class="heading">
+                                    Public Liability
+
+                                    <p id="subheading">
+                                        Protect your business from third-party
+                                        claims and risks.
+                                    </p>
+                                </h1>
+                                <p
+                                    class="font-serif text-xxs md:text-md lg:text-xl p-3"
+                                >
+                                    At Halpern Insurance, we offer home
+                                    insurance that protects your property,
+                                    belongings, and personal liability against
+                                    risks like fire, theft, and natural
+                                    disasters. Our policies are tailored to meet
+                                    your needs, covering everything from your
+                                    home's structure to your personal
+                                    possessions. We also offer liability
+                                    coverage, protecting you if accidents occur
+                                    on your property. With flexible options and
+                                    competitive rates, we ensure your home is
+                                    secure in any situation. Our goal is to
+                                    provide peace of mind so you can focus on
+                                    what matters. Trust Halpern Insurance to
+                                    keep your home protected.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div
+                                class="absolute bottom-40 right-44 animate-bounce w-16 h-16"
+                            >
+                                <a
+                                    :href="route('quote.index')"
+                                    class="border-white text-white border-2 font-serif text-3xl rounded-3xl px-7 py-2 hover:bg-white hover:text-black"
+                                >
+                                    Quote
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
