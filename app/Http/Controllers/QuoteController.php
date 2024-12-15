@@ -13,6 +13,7 @@ class QuoteController extends Controller
         $quotes = Quote::all();
         // return response()->json($quotes);
         return Inertia::render('Halperninsurance/Quote/Index', [
+            'route' => request()->route()->getName(),
         ]);
     }
 
@@ -47,7 +48,7 @@ class QuoteController extends Controller
         // 'quote_price_id' => 'nullable|exists:quote_prices,price_id',
         // ]);
         // Set default value for visitor_id if not provided
-        $validatedData['visitor_id'] = $validatedData['visitor_id'] ?? '1';
+        $validatedData['visitor_id'] = $validatedData['visitor_id'] ?? '2';
 
         $quote = Quote::create($validatedData);
 
@@ -62,8 +63,7 @@ class QuoteController extends Controller
     //  */
     public function show(int $id)
     {
-        dd('klkl');
-        $quote = Quote::find($id);
+        $quote = Quote::query()->where('quote_id', $id)->first();
         return Inertia::render('Halperninsurance/Quote/Show', [
             'quote' => $quote,
         ]);
@@ -116,5 +116,12 @@ class QuoteController extends Controller
     {
         $quote->delete();
         return response()->json(null, 204);
+    }
+
+    public function payment(Request $request)
+    {
+        return Inertia::render('Halperninsurance/Quote/Payment', [
+
+        ]);
     }
 }

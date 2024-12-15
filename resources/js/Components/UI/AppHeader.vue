@@ -4,10 +4,12 @@
             <ul
                 class="flex text-xs justify-evenly content-center items-center justify-items-center w-full"
             >
+            <a :href="route('halperninsurance.index')">
                 <div class="flex space-x-2">
                     <img src="/images/logo.png" class="h-16" />
                     <img src="/images/wording.png" class="h-16" />
-                </div>
+                  </div>
+                </a>
                 <!-- <li
                     class="group group-hover:translate-y-36 transition-all duration-1000 ease-in-out group-hover:bg-gray-100 rounded-lg w-full fixed space-x-3 p-12 translate-y-[-100%] group-hover:block delay-150"
                 >

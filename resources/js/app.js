@@ -21,7 +21,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(FormKit, defaultConfig(config))
             .use(plugin)
-            .use(ZiggyVue)
+            .use(ZiggyVue, Ziggy)
             .mount(el);
     },
     progress: {

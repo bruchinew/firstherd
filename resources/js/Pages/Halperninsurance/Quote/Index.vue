@@ -2,7 +2,7 @@
     <AppHeader></AppHeader>
     <QuotesHeader></QuotesHeader>
 
-    <div>
+    <div class="p-5">
         <h1 class="text-xl">Get a Quote</h1>
         <p>Please answer everything accurately before continuing.</p>
         <div class="double">
@@ -108,15 +108,16 @@
                             label="Quote Amount"
                         />
                     </div>
-                    <div class="mt-4 flex justify-end">
-                        <button
-                            type="button"
-                            @click="submit"
-                            :disabled="!isFormComplete"
-                        >
-                            submit
-                        </button>
-                    </div>
+                </div>
+                <div class="mt-4 mr-6 flex justify-end">
+                    <button
+                        type="button"
+                        @click="submit"
+                        :disabled="!isFormComplete"
+                        class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl"
+                    >
+                        submit
+                    </button>
                 </div>
             </FormKit>
             <div v-if="submitted">
@@ -168,10 +169,7 @@ const submit = () => {
     console.log("Submitting form...");
     form.post(route("quote.store", form), {
         onSuccess: () => {
-            console.log(submitted.value);
-            nextTab.value = true;
             console.log("Form submitted successfully");
-            console.log(nextTab.value);
         },
         onError: () => {
             console.log("Form submission failed");
