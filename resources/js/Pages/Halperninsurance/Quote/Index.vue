@@ -81,9 +81,10 @@
                         />
                         <FormKit
                             v-model="form.build_year"
-                            type="date"
+                            type="select"
                             name="build_year"
                             label="Build Year"
+                            :options="BuildYearOptions"
                         />
                     </div>
                 </div>
@@ -144,6 +145,7 @@ const handleSubmit = () => {
 const FormFilled = () => {
     return true;
 };
+const BuildYearOptions = [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800];
 
 const form = useForm({
     name: "",

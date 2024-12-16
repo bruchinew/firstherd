@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/halperninsurance/quote', [QuoteController::class,'index'])->name('quote.index');
     Route::post('/halperninsurance/quote/index', [QuoteController::class,'store'])->name('quote.store');
     Route::get('/halperninsurance/quote/payment', [QuoteController::class,'payment'])->name('quote.payment');
+    Route::get('/halperninsurance/quote/summary', [QuoteController::class,'summary'])->name('quote.summary');
     Route::get('/halperninsurance/quote/{quote}', [QuoteController::class,'show'])->name('quote.show');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

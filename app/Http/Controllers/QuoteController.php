@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quote;
+use App\Models\QuotePrice;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -63,9 +64,14 @@ class QuoteController extends Controller
     //  */
     public function show(int $id)
     {
+        $buildYear = QuotePrice::query()->where('factor_type', 'build_year')->first()->multiplication_amount;
+
         $quote = Quote::query()->where('quote_id', $id)->first();
+
+        $final = $quote->build_year = $quote->build_year * $buildYear;
         return Inertia::render('Halperninsurance/Quote/Show', [
             'quote' => $quote,
+            'final' => $final,
         ]);
 
 
@@ -121,6 +127,12 @@ class QuoteController extends Controller
     public function payment(Request $request)
     {
         return Inertia::render('Halperninsurance/Quote/Payment', [
+
+        ]);
+    }
+    public function summary(Request $request)
+    {
+        return Inertia::render('Halperninsurance/Quote/Summary', [
 
         ]);
     }

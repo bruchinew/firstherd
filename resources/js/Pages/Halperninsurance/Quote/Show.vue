@@ -17,6 +17,9 @@
         <p><strong>Quote Date:</strong> {{ quote.quote_date }}</p>
         <p><strong>Quote Amount:</strong> {{ quote.quote_amount }}</p>
         <p><strong>Status:</strong> {{ quote.status }}</p>
+        <p>
+            <strong>{{ final }}</strong>
+        </p>
         <a :href="route('quote.payment')">
             <button>Confirm</button>
         </a>
@@ -30,6 +33,7 @@ import { defineProps } from "vue";
 
 const props = defineProps({
     quote: Object,
+    final: Number,
 });
 </script>
 <style scoped>
