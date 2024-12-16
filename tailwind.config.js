@@ -20,6 +20,7 @@ export default {
             },
             transitionDelay: {
                 750: "750ms",
+                400: "400ms",
                 800: "800ms",
                 850: "850ms",
                 900: "900ms",
