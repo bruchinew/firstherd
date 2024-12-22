@@ -6,6 +6,8 @@ use App\Models\Quote;
 use App\Models\QuotePrice;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Stripe\PaymentIntent;
+use Stripe\Stripe;
 
 class QuoteController extends Controller
 {
@@ -62,12 +64,11 @@ class QuoteController extends Controller
     //  * @param  \App\Models\Quote  $quote
     //  * @return \Illuminate\Http\Response
     //  */
-    public function show(int $id)
+    public function show()
     {
         $buildYear = QuotePrice::query()->where('factor_type', 'build_year')->first()->multiplication_amount;
 
-        $quote = Quote::query()->where('quote_id', $id)->first();
-
+        $quote = Quote::query()->where('quote_id', 1)->first();
         $final = $quote->build_year = $quote->build_year * $buildYear;
         return Inertia::render('Halperninsurance/Quote/Show', [
             'quote' => $quote,
@@ -124,16 +125,58 @@ class QuoteController extends Controller
         return response()->json(null, 204);
     }
 
-    public function payment(Request $request)
+    public function payment(Request $request, int $id)
     {
-        return Inertia::render('Halperninsurance/Quote/Payment', [
+        dd($id);
 
+        $quote = Quote::query()->where('quote_id', $id)->first();
+
+        return Inertia::render('Halperninsurance/Quote/Payment', [
+            'final' => $request->final,
+            'quote' => $quote,
         ]);
     }
-    public function summary(Request $request)
-    {
-        return Inertia::render('Halperninsurance/Quote/Summary', [
 
+    public function storePayment(Request $request)
+    {
+        $quoteAmount = Quote::query()->where('quote_id', 1)->first()->quote_amount;
+        $final = floor($quoteAmount);
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        try {
+            // Create a PaymentIntent with the amount and currency
+            $paymentIntent = PaymentIntent::create([
+                'amount' => $final, // Convert amount to cents
+                'currency' => 'usd',
+                'payment_method' => $request->paymentMethodId,
+                'confirmation_method' => 'manual',
+                'confirm' => true,
+                'return_url' => route('quote.summary'),
+            ]);
+
+
+            // Check the status of the PaymentIntent
+            if ($paymentIntent->status == 'succeeded') {
+                return response()->json([
+                    'success' => true,
+                ]);
+            } else {
+                // Handle other statuses or errors
+                return response()->json(['error' => 'Payment failed or requires further action.']);
+            }
+
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+        }
+    }
+
+    public function summary(Request $request, int $id)
+    {
+
+        $quote = Quote::query()->where('quote_id', $id)->first();
+
+        return Inertia::render('Halperninsurance/Quote/Summary', [
+'quote' => $quote,
         ]);
     }
 }

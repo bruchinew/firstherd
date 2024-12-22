@@ -1,6 +1,7 @@
 <template>
     <AppHeader></AppHeader>
     <QuotesHeader />
+    {{ quote }}
     <div class="payment-form">
         <h2>Complete Your Payment</h2>
         <form @submit.prevent="handleSubmit">
@@ -19,11 +20,12 @@ import AppHeader from "@/Components/UI/AppHeader.vue";
 import { loadStripe } from "@stripe/stripe-js";
 import { ref, onMounted } from "vue";
 
+const props = defineProps({
+    quote: Object,
+});
 // Vue's ref() to hold Stripe elements and error messages
 const cardElement = ref(null);
-const stripePromise = loadStripe(
-    "pk_test_51QWcRAHpgVn9LJgTvxF5Covjm0WmPBARPM2oe75nVWlIYkX6au1xzhjs9t2HiAknToDSiVyHlPKFy5rIZYvGAyaf00SG5U2KfJ"
-); // Replace with your Stripe public key
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY); // Use the public key from the environment variables
 const errorElement = ref(null);
 
 // Create Stripe Elements and mount them when the component is mounted
@@ -37,38 +39,54 @@ onMounted(async () => {
     cardElement.value = card;
 });
 
-// Handle form submission and token creation
+// Handle form submission and pass minimal values to the backend
 const handleSubmit = async () => {
     const stripe = await stripePromise;
     const card = cardElement.value;
 
-    // Create a token using Stripe.js
-    const { token, error } = await stripe.createToken(card);
+    // Create a payment method using Stripe.js
+    const { paymentMethod, error } = await stripe.createPaymentMethod({
+        type: "card",
+        card: card,
+    });
 
     if (error) {
         // Display the error in the 'card-errors' div
         errorElement.value.textContent = error.message;
     } else {
-        // Send the token to your server for processing payment
-        await stripeTokenHandler(token);
+        // Send the payment method ID to your server for processing payment
+        await processPayment(paymentMethod.id);
     }
 };
 
-// Handle the token received and send it to the server
-const stripeTokenHandler = async (token) => {
+// Send the payment method ID to the backend for processing
+const processPayment = async (paymentMethodId) => {
     try {
-        // Replace '/charge' with your backend endpoint
-        const response = await fetch("/charge", {
+        const response = await fetch(route("quote.storepayment"), {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute("content"),
             },
-            body: JSON.stringify({ stripeToken: token.id }),
+            body: JSON.stringify({
+                paymentMethodId: paymentMethodId,
+            }),
         });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error("Error response from server:", errorText);
+            throw new Error("Network response was not ok");
+        }
 
         const data = await response.json();
 
         if (data.success) {
+            window.location.href = route("quote.summary", {
+                quote: quote.quote_id,
+            });
             alert("Payment successful!");
         } else {
             alert("Payment failed: " + data.error);

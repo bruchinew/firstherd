@@ -20,7 +20,11 @@
         <p>
             <strong>{{ final }}</strong>
         </p>
-        <a :href="route('quote.payment')">
+        <a
+            :href="
+                route('quote.payment', { final: final, quote: quote.quote_id })
+            "
+        >
             <button>Confirm</button>
         </a>
     </div>
