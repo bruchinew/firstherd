@@ -1,9 +1,9 @@
 <template>
     <AppHeader></AppHeader>
-    <QuotesHeader></QuotesHeader>
-    This is the Summary page
-    <div>
+    <QuotesHeader :quote-id="quote.quote_id"></QuotesHeader>
 
+    <div class="p-9">
+        This is the Summary page
         <h1>Thank you for your Quote</h1>
         <p><strong>Quote ID:</strong> {{ quote.quote_id }}</p>
         <p><strong>Name:</strong> {{ quote.name }}</p>
@@ -22,7 +22,11 @@
         <p>
             <strong>{{ final }}</strong>
         </p>
-       
+        <button>Confirm</button>
+    </div>
+    <button class="border-black border rounded-xl p-2">
+        <a :href="route('halperninsurance.index')">Back to home</a>
+    </button>
 </template>
 
 <script setup>

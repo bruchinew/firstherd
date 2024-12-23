@@ -90,7 +90,7 @@
                             class="absolute bottom-44 -left-44 animate-bounce w-16 h-16"
                         >
                             <a
-                                :href="route('quote.index')"
+                                :href="route('quotes.index')"
                                 class="border-white text-white border-2 font-serif text-3xl rounded-3xl px-7 py-2 hover:bg-white hover:text-black"
                             >
                                 Quote
@@ -141,7 +141,7 @@
                             class="absolute bottom-44 -left-44 animate-bounce w-16 h-16"
                         >
                             <a
-                                :href="route('quote.index')"
+                                :href="route('quotes.index')"
                                 class="border-white text-white border-2 font-serif text-3xl rounded-3xl px-7 py-2 hover:bg-white hover:text-black"
                             >
                                 Quote
@@ -190,7 +190,7 @@
                             class="absolute -bottom-32 -left-44 animate-bounce w-16 h-16"
                         >
                             <a
-                                :href="route('quote.index')"
+                                :href="route('quotes.index')"
                                 class="border-white text-white border-2 font-serif text-3xl rounded-3xl px-7 py-2 hover:bg-white hover:text-black"
                             >
                                 Quote
@@ -243,7 +243,7 @@
                                 class="absolute bottom-40 right-44 animate-bounce w-16 h-16"
                             >
                                 <a
-                                    :href="route('quote.index')"
+                                    :href="route('quotes.index')"
                                     class="border-white text-white border-2 font-serif text-3xl rounded-3xl px-7 py-2 hover:bg-white hover:text-black"
                                 >
                                     Quote

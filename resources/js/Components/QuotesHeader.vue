@@ -3,49 +3,49 @@
         class="mx-80 sticky mt-8 top-5 p-3 z-50 bg-white shadow-md flex justify-center"
     >
         <a
-            :href="route('quote.index')"
+            :href="route('quotes.index')"
             :class="{
-                'bg-white': isActiveTab('quote.index'),
+                'bg-white': isActiveTab('quotes.index'),
                 'animate-bg': animateBg,
             }"
-            :disabled="isDisabled('quote.index')"
-            class="tab px-4 py-2 text-2xl before:translate-x-0 before:ease-in-out before:duration-500 before:delay-0"
+            :disabled="isDisabled('quotes.index')"
+            class="tab before:bg-gradient-to-r before:from-blue-900 before:to-blue-500 px-4 py-2 text-2xl before:translate-x-0 before:ease-in-out before:duration-500 before:delay-0"
         >
             <span class="relative z-10">Your Details</span>
         </a>
         <a
-            :href="route('quote.show', '1')"
+            :href="route('quote.show', quoteId)"
             :class="{
-                'bg-white ': isActiveTab('quote.show'),
-                disabled: isDisabled('quote.show'),
+                'bg-white ': isActiveTab('quote.show', quoteId),
+                disabled: isDisabled('quote.show', quoteId),
                 'animate-bg': animateBg,
             }"
             :disabled="isDisabled('quote.show')"
-            class="tab px-4 py-2 text-2xl before:translate-x-0 before:ease-in-out before:duration-500 before:delay-500"
+            class="tab before:bg-gradient-to-r before:from-blue-500 before:to-blue-100 px-4 py-2 text-2xl before:translate-x-0 before:ease-in-out before:duration-500 before:delay-400"
         >
             <span class="relative z-10">Your Quote</span>
         </a>
         <a
-            :href="route('quote.payment')"
+            :href="route('quote.payment', quoteId)"
             :class="{
-                'bg-white': isActiveTab('quote.payment'),
-                disabled: isDisabled('quote.payment'),
+                'bg-white': isActiveTab('quote.payment', quoteId),
+                disabled: isDisabled('quote.payment', quoteId),
                 'animate-bg': animateBg,
             }"
-            :disabled="isDisabled('quote.payment')"
-            class="tab px-4 py-2 text-2xl before:translate-x-0 before:ease-in-out before:duration-500 before:delay-1000"
+            :disabled="isDisabled('quote.payment', quoteId)"
+            class="tab before:bg-gradient-to-r before:from-blue-100 before:to-yellow-300 px-4 py-2 text-2xl before:translate-x-0 before:ease-in-out before:duration-500 before:delay-800"
         >
             <span class="relative z-10">Payment</span>
         </a>
         <a
-            :href="route('quote.summary')"
+            :href="route('quote.summary', quoteId)"
             :class="{
-                'bg-white': isActiveTab('quote.summary'),
-                disabled: isDisabled('quote.summary'),
+                'bg-white': isActiveTab('quote.summary', quoteId),
+                disabled: isDisabled('quote.summary', quoteId),
                 'animate-bg': animateBg,
             }"
-            :disabled="isDisabled('quote.summary')"
-            class="tab px-4 py-2 text-2xl before:translate-x-0 before:ease-in-out before:duration-500 before:delay-1500"
+            :disabled="isDisabled('quote.summary', quoteId)"
+            class="tab before:bg-gradient-to-r before:from-yellow-300 before:to-yellow-700 px-4 py-2 text-2xl before:translate-x-0 before:ease-in-out before:duration-500 before:delay-1200"
         >
             <span class="relative z-10">Summary</span>
         </a>
@@ -54,18 +54,24 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+defineProps({
+    quoteId: {
+        type: Number,
+        required: false,
+    },
+});
 
 const animateBg = ref(false);
 
 const routePatterns = {
-    "quote.index": /^\/halperninsurance\/quote$/,
+    "quotes.index": /^\/halperninsurance\/quotes$/,
     "quote.show": /^\/halperninsurance\/quote\/\d+$/,
-    "quote.payment": /^\/halperninsurance\/quote\/payment$/,
-    "quote.summary": /^\/halperninsurance\/quote\/summary$/,
+    "quote.payment": /^\/halperninsurance\/quote\/\d+\/payment$/,
+    "quote.summary": /^\/halperninsurance\/quote\/\d+\/summary$/,
 };
 
 const tabOrder = [
-    "quote.index",
+    "quotes.index",
     "quote.show",
     "quote.payment",
     "quote.summary",
@@ -98,6 +104,7 @@ onMounted(() => {
     position: relative;
     overflow: hidden;
     color: #4a5568; /* text-gray-600 */
+    margin-right: -1px; /* Remove space between tabs */
 }
 
 .tab::before {
@@ -107,7 +114,6 @@ onMounted(() => {
     left: -100%;
     width: 100%;
     height: 100%;
-    background-color: #ffd700; /* Replace with your mustard color */
     /* transition: left 0.5s ease-in-out; */
 }
 

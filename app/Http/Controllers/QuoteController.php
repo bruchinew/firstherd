@@ -55,7 +55,7 @@ class QuoteController extends Controller
 
         $quote = Quote::create($validatedData);
 
-        return redirect()->route('quote.show', ['quote' => $quote->id]);
+        return redirect()->route('quote.show', $quote->id);
     }
 
     // /**
@@ -64,12 +64,12 @@ class QuoteController extends Controller
     //  * @param  \App\Models\Quote  $quote
     //  * @return \Illuminate\Http\Response
     //  */
-    public function show()
+    public function show(int $quote)
     {
         $buildYear = QuotePrice::query()->where('factor_type', 'build_year')->first()->multiplication_amount;
 
-        $quote = Quote::query()->where('quote_id', 1)->first();
-        $final = $quote->build_year = $quote->build_year * $buildYear;
+        $quote = Quote::query()->where('quote_id', $quote)->first();
+        $final = $quote->build_year * $buildYear;
         return Inertia::render('Halperninsurance/Quote/Show', [
             'quote' => $quote,
             'final' => $final,
@@ -127,7 +127,6 @@ class QuoteController extends Controller
 
     public function payment(Request $request, int $id)
     {
-        dd($id);
 
         $quote = Quote::query()->where('quote_id', $id)->first();
 
@@ -151,7 +150,7 @@ class QuoteController extends Controller
                 'payment_method' => $request->paymentMethodId,
                 'confirmation_method' => 'manual',
                 'confirm' => true,
-                'return_url' => route('quote.summary'),
+                'return_url' => route('quote.summary', ['quote' => 1]),
             ]);
 
 

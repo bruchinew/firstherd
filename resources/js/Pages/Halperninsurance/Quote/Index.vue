@@ -1,6 +1,6 @@
 <template>
     <AppHeader></AppHeader>
-    <QuotesHeader></QuotesHeader>
+    <QuotesHeader :quote-id="quoteId"></QuotesHeader>
 
     <div class="p-5">
         <h1 class="text-xl">Get a Quote</h1>
@@ -84,6 +84,7 @@
                             type="select"
                             name="build_year"
                             label="Build Year"
+                            placeholder="please select..."
                             :options="BuildYearOptions"
                         />
                     </div>
@@ -136,6 +137,7 @@ import { ref, inject, computed } from "vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 import QuotesHeader from "@/Components/QuotesHeader.vue";
 
+const quoteId = ref(1);
 const submitted = ref(false);
 const nextTab = ref(false);
 

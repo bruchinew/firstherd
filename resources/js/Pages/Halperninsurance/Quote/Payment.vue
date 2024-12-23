@@ -1,7 +1,7 @@
 <template>
     <AppHeader></AppHeader>
-    <QuotesHeader />
-    {{ quote }}
+    <QuotesHeader :quote-id="quote.quote_id"></QuotesHeader>
+
     <div class="payment-form">
         <h2>Complete Your Payment</h2>
         <form @submit.prevent="handleSubmit">
@@ -85,9 +85,8 @@ const processPayment = async (paymentMethodId) => {
 
         if (data.success) {
             window.location.href = route("quote.summary", {
-                quote: quote.quote_id,
+                quote: props.quote.quote_id,
             });
-            alert("Payment successful!");
         } else {
             alert("Payment failed: " + data.error);
         }
