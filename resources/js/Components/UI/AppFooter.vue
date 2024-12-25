@@ -1,14 +1,16 @@
 <template>
-    <div class="footer-container">
-        <div class="content">
+    <div class="footer-container h-52">
+        <div class="bg-white/80 h-52 grid grid-cols-4">
+            <div class="p-12">
+                <h1>Halpern Insurance</h1>
+                <h1>The Insurance company you can trust</h1>
+            </div>
             <button>
                 <a :href="route('quotes.index')">Contact Us</a>
             </button>
-            <br />
             <button>
                 <a :href="route('quotes.index')">Support</a>
             </button>
-            <br />
             <button>
                 <a :href="route('quotes.index')">Help</a>
             </button>
@@ -24,13 +26,6 @@
     width: 100%;
     height: 200px; /* Adjust the height as needed */
     background: url("/images/wording.png") no-repeat center center;
-    background-size: contain, contain;
-    opacity: 0.1; /* Adjust the opacity for watermark effect */
-}
-
-.content {
-    position: relative;
-    z-index: 1;
-    /* Add any additional styling for your footer content */
+    background-size: contain;
 }
 </style>
