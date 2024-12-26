@@ -9,7 +9,7 @@
                 'animate-bg': animateBg,
             }"
             :disabled="isDisabled('quotes.index')"
-            class="tab before:bg-gradient-to-r before:from-blue-900 before:to-blue-500 px-4 py-2 text-2xl before:translate-x-0 before:ease-in-out before:duration-500 before:delay-0"
+            class="tab before:bg-gradient-to-r before:from-blue-900 before:to-blue-500 before:text-white px-4 py-2 text-2xl before:translate-x-0 before:ease-in-out before:duration-500 before:delay-0"
         >
             <span class="relative z-10">Your Details</span>
         </a>
@@ -103,7 +103,7 @@ onMounted(() => {
 .tab {
     position: relative;
     overflow: hidden;
-    color: #4a5568; /* text-gray-600 */
+    color: rgb(46, 40, 40); /* text-gray-600 */
     margin-right: -1px; /* Remove space between tabs */
 }
 

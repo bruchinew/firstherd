@@ -1,8 +1,12 @@
 <template>
     <AppHeader
+        :can-login="canLogin"
+        :can-register="canRegister"
         @mouseenter="openDropDown(true), console.log(open)"
         @mouseleave="openDropDown(false), console.log(open)"
-        :class="{ 'bg-gray-100/100': open }"
+        :class="{
+            'bg-blue-100/100': open,
+        }"
     ></AppHeader>
     <body
         :class="{
@@ -10,7 +14,7 @@
             'transition-all ease-in-out duration-300 delay-300': !open,
         }"
     >
-        <div class="p-3">
+        <div class="p-3 z-0">
             <!-- <h1 id="logo" class="text-8xl font-extrabold text-center">
                 HALPERN INSURANCE
             </h1>
@@ -53,7 +57,7 @@
 
         <section class="pb-5">
             <div
-                class="bg-local bg-center bg-no-repeat bg-cover h-screen rounded-xl"
+                class="bg-local bg-center bg-no-repeat bg-cover h-screen rounded-xl shadow-inside"
                 style="background-image: url('images/Home.jpg')"
             >
                 <div class="justify-center p-10 flex">
@@ -264,6 +268,11 @@ import AppHeader from "@/Components/UI/AppHeader.vue";
 import AppHeaderHome from "@/Components/UI/AppHeaderHome.vue";
 import { ref, onMounted } from "vue";
 
+defineProps({
+    canLogin: Boolean,
+    canRegister: Boolean,
+});
+
 function openDropDown(value) {
     open.value = value;
 }
@@ -326,4 +335,7 @@ onMounted(() => {
 .fly-in {
     animation: flyIn 1s ease-out forwards;
 }
+/* .shadow-inside {
+    box-shadow: inset 10px 10px 10px 10px rgba(0, 0, 0, 0.5);
+} */
 </style>

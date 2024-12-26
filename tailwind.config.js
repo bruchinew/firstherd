@@ -17,6 +17,10 @@ export default {
             },
             colors: {
                 mustard: "#ceaf4c",
+                navy: "rgb(1, 51, 101)",
+            },
+            zIndex: {
+                9999: 9999,
             },
             transitionDelay: {
                 750: "750ms",

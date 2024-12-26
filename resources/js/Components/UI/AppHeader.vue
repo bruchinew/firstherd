@@ -1,14 +1,14 @@
 <template>
-    <nav class="bg-gray-100/90 sticky top-0 w-full left-0 z-50 blur-none">
+    <nav class="bg-gray-100/90 fixed top-0 w-full left-0 z-[9999] blur-none">
         <div class="flex items-center justify-center">
             <ul
                 class="flex text-xs justify-evenly content-center items-center justify-items-center w-full"
             >
-            <a :href="route('halperninsurance.index')">
-                <div class="flex space-x-2">
-                    <img src="/images/logo.png" class="h-16" />
-                    <img src="/images/wording.png" class="h-16" />
-                  </div>
+                <a :href="route('halperninsurance.index')">
+                    <div class="flex space-x-2">
+                        <img src="/images/logo.png" class="h-16" />
+                        <img src="/images/wording.png" class="h-16" />
+                    </div>
                 </a>
                 <!-- <li
                     class="group group-hover:translate-y-36 transition-all duration-1000 ease-in-out group-hover:bg-gray-100 rounded-lg w-full fixed space-x-3 p-12 translate-y-[-100%] group-hover:block delay-150"
@@ -43,39 +43,44 @@
                 <li>
                     <div
                         href="#"
-                        class="hover:text-blue-500 relative group/house z-0"
+                        class="hover:text-blue-500 relative group/house"
                     >
                         Our products
                         <div
-                            class="group z-0 group-hover/house:translate-y-4 w-screen transition-all duration-1000 ease-in-out group-hover/house:bg-gray-100 rounded-lg fixed space-x-3 p-12 translate-y-[-100%] left-0 group-hover/house:block delay-150 flex justify-between"
+                            class="group-hover/house:overflow-y-hidden group-hover/house:isolate group-hover/house:translate-y-2 group-hover/house: w-screen transition-all duration-1000 ease-in-out group-hover/house:bg-gray-100 rounded-lg fixed p-12 translate-y-[-100%] left-0 group-hover/house:block delay-150"
                         >
                             <a
                                 :href="route('apple.index')"
-                                class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in delay-750"
+                                class="block text-2xl text-center font-mono font-extrabold opacity-0 transition-all group-hover/house:opacity-100 group-hover/house:duration-1000 group-hover/house:ease-in delay-750"
+                                >Home Insurance</a
+                            >
+                            <a
+                                :href="route('apple.index')"
+                                class="block text-2xl text-center font-mono font-extrabold opacity-0 transition-all group-hover/house:opacity-100 group-hover/house:duration-1000 group-hover/house:ease-in delay-750"
                                 >LandLord Insurance</a
                             >
                             <a
                                 href="#"
-                                class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in delay-800"
+                                class="block text-2xl text-center font-mono font-extrabold opacity-0 transition-all group-hover/house:opacity-100 group-hover/house:duration-1000 group-hover/house:ease-in delay-800"
                                 >Public Liability</a
                             >
                             <a
                                 href="#"
-                                class="block opacity-0 transition-all group-hover:opacity-100 group-hover:duration-1000 group-hover:ease-in delay-900"
+                                class="block text-2xl text-center font-mono font-extrabold opacity-0 transition-all group-hover/house:opacity-100 group-hover/house:duration-1000 group-hover/house:ease-in delay-900"
                                 >Commercial Insurance</a
                             >
                         </div>
                     </div>
                 </li>
 
-                <li class="z-50">
-                    <a href="#" class="hover:text-blue-500 "> Claims</a>
+                <li>
+                    <a href="#" class="hover:text-blue-500"> Claims</a>
                 </li>
-                <li class="z-50">
-                    <a href="#" class="hover:text-blue-500 ">Support</a>
-                </li class="z-50">
-                <li class="z-50">
-                    <a href="#" class="hover:text-blue-500 ">About Us</a>
+                <li>
+                    <a href="#" class="hover:text-blue-500">Support</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:text-blue-500">About Us</a>
                 </li>
                 <li>
                     <a href="#" class="hover:text-blue-500">
@@ -92,11 +97,45 @@
                     </a>
                 </li>
                 <li>
-                    <button href="#" class="bg-mustard p-3 text-md rounded-xl">
-                        Log in
-                    </button>
+                    <div v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
+                        <Link
+                            v-if="$page.props.auth.user"
+                            :href="route('dashboard')"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                        >
+                            Dashboard
+                        </Link>
+
+                        <template v-else>
+                            <Link
+                                :href="route('login')"
+                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                            >
+                                Log in
+                            </Link>
+
+                            <Link
+                                v-if="canRegister"
+                                :href="route('register')"
+                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                            >
+                                Register
+                            </Link>
+                        </template>
+                    </div>
                 </li>
             </ul>
         </div>
     </nav>
 </template>
+<script setup>
+import { Link } from "@inertiajs/vue3";
+defineProps({
+    canLogin: {
+        type: Boolean,
+    },
+    canRegister: {
+        type: Boolean,
+    },
+});
+</script>
