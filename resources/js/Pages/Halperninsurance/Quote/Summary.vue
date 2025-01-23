@@ -1,6 +1,6 @@
 <template>
     <AppHeader></AppHeader>
-    <QuotesHeader :quote-id="quote.quote_id"></QuotesHeader>
+    <QuotesHeader :quote-id="quote.id"></QuotesHeader>
 
     <div class="container mx-auto p-6 bg-white shadow-md rounded-lg mt-6">
         <h1 class="text-3xl font-bold mb-4 text-center">
@@ -8,7 +8,7 @@
         </h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-                <p><strong>Quote ID:</strong> {{ quote.quote_id }}</p>
+                <p><strong>Quote ID:</strong> {{ quote.id }}</p>
                 <p><strong>Name:</strong> {{ quote.name }}</p>
                 <p><strong>Email:</strong> {{ quote.email }}</p>
                 <p><strong>Phone:</strong> {{ quote.phone }}</p>

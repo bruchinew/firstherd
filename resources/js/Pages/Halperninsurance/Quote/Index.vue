@@ -103,12 +103,6 @@
                             name="quote_date"
                             label="Quote Date"
                         />
-                        <FormKit
-                            v-model="form.quote_amount"
-                            type="number"
-                            name="quote_amount"
-                            label="Quote Amount"
-                        />
                     </div>
                 </div>
                 <div class="mt-4 mr-6 flex justify-end">
@@ -130,16 +124,13 @@
 </template>
 
 <script setup>
-import Tab from "@/Components/Tab.vue";
-import Tabs from "@/Components/Tabs.vue";
 import AppHeader from "@/Components/UI/AppHeader.vue";
-import { ref, inject, computed } from "vue";
+import { ref, computed } from "vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 import QuotesHeader from "@/Components/QuotesHeader.vue";
 
 const quoteId = ref(1);
 const submitted = ref(false);
-const nextTab = ref(false);
 
 const handleSubmit = () => {
     submitted.value = true;
@@ -161,7 +152,6 @@ const form = useForm({
     build_year: "",
     location: "",
     quote_date: "",
-    quote_amount: "",
 });
 
 const isFormComplete = computed(() => {

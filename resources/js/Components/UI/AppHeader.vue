@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-gray-100/90 fixed top-0 w-full left-0 z-[9999] blur-none">
+    <nav class="bg-gray-100/90 sticky top-0 w-full left-0 z-[9999] blur-none">
         <div class="flex items-center justify-center">
             <ul
                 class="flex text-xs justify-evenly content-center items-center justify-items-center w-full"
@@ -9,6 +9,10 @@
                         <img src="/images/logo.png" class="h-16" />
                         <img src="/images/wording.png" class="h-16" />
                     </div>
+                </a>
+
+                <a href="#" class="hover:text-blue-500">
+                    <button class="hover:text-blue-500">dashboard</button>
                 </a>
                 <!-- <li
                     class="group group-hover:translate-y-36 transition-all duration-1000 ease-in-out group-hover:bg-gray-100 rounded-lg w-full fixed space-x-3 p-12 translate-y-[-100%] group-hover:block delay-150"

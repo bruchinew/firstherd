@@ -34,10 +34,10 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/halperninsurance/quotes', [QuoteController::class, 'index'])->name('quotes.index');
     Route::get('/halperninsurance/quote/{quote}', [QuoteController::class, 'show'])->name('quote.show');
-    Route::get('/halperninsurance/quote/{quote}/summary', [QuoteController::class, 'summary'])->name('quote.summary');
-    Route::post('/halperninsurance/quote/payment', [QuoteController::class, 'storePayment'])->name('quote.storepayment');
-    Route::get('/halperninsurance/quote/{quote}/payment', [QuoteController::class, 'payment'])->name('quote.payment');
     Route::post('/halperninsurance/quote/index', [QuoteController::class, 'store'])->name('quote.store');
+    Route::get('/halperninsurance/quote/{quote}/summary', [QuoteController::class, 'summary'])->name('quote.summary');
+    Route::get('/halperninsurance/quote/{quote}/payment', [QuoteController::class, 'payment'])->name('quote.payment');
+    Route::post('/halperninsurance/quote/{quote}/payment', [QuoteController::class, 'storePayment'])->name('quote.storepayment');
     Route::resources([
         'quote_prices' => QuotePriceController::class,
     ]);

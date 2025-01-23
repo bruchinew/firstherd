@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\QuoteFormData;
 use App\Models\Quote;
 use App\Models\QuotePrice;
 use Illuminate\Http\Request;
@@ -13,8 +14,6 @@ class QuoteController extends Controller
 {
     public function index(Request $request)
     {
-        $quotes = Quote::all();
-        // return response()->json($quotes);
         return Inertia::render('Halperninsurance/Quote/Index', [
             'route' => request()->route()->getName(),
         ]);
@@ -26,34 +25,14 @@ class QuoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, QuoteFormData $quoteFormData)
     {
-        $validatedData = $request->all();
-        // ->validate([
-        // 'visitor_id' => 'required|string|max:255',
-        // 'name' => 'nullable|string|max:255',
-        // 'email' => 'nullable|string|email|max:255',
-        // 'phone' => 'nullable|string|max:20',
-        // 'address' => 'required|string|max:255',
-        // 'property_value' => 'required|numeric',
-        // 'coverage_amount' => 'required|numeric',
-        // 'property_type' => 'required|in:detached,semi-detached,apartment,bungalow',
-        // 'number_of_claims' => 'nullable|integer',
-        // 'build_year' => 'nullable|integer',
-        // 'location' => 'nullable|string|max:255',
-        // 'quote_date' => 'nullable|date',
-        // 'quote_amount' => 'nullable|numeric',
-        // 'status' => 'nullable|in:pending,sent,expired',
-        // 'coverage_factor' => 'nullable|numeric',
-        // 'location_factor' => 'nullable|numeric',
-        // 'claims_factor' => 'nullable|numeric',
-        // 'age_factor' => 'nullable|numeric',
-        // 'quote_price_id' => 'nullable|exists:quote_prices,price_id',
-        // ]);
-        // Set default value for visitor_id if not provided
-        $validatedData['visitor_id'] = $validatedData['visitor_id'] ?? '2';
+        $quoteFormData->visitor_id = auth()->id();
+        $buildYear = QuotePrice::query()->where('factor_type', 'build_year')->first()->multiplication_amount;
+        $quote_amount = $request->input('build_year') * $buildYear;
+        $quoteFormData->quote_amount = $quote_amount;
 
-        $quote = Quote::create($validatedData);
+        $quote = Quote::create($quoteFormData->toArray());
 
         return redirect()->route('quote.show', $quote->id);
     }
@@ -64,15 +43,10 @@ class QuoteController extends Controller
     //  * @param  \App\Models\Quote  $quote
     //  * @return \Illuminate\Http\Response
     //  */
-    public function show(int $quote)
+    public function show(Request $request, Quote $quote)
     {
-        $buildYear = QuotePrice::query()->where('factor_type', 'build_year')->first()->multiplication_amount;
-
-        $quote = Quote::query()->where('quote_id', $quote)->first();
-        $final = $quote->build_year * $buildYear;
         return Inertia::render('Halperninsurance/Quote/Show', [
             'quote' => $quote,
-            'final' => $final,
         ]);
 
 
@@ -85,32 +59,16 @@ class QuoteController extends Controller
      * @param  \App\Models\Quote  $quote
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Quote $quote)
+    public function update(Request $request, QuoteFormData $quoteFormData)
     {
-        $validatedData = $request->validate([
-            'visitor_id' => 'required|string|max:255',
-            'name' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255',
-            'phone' => 'nullable|string|max:20',
-            'address' => 'required|string|max:255',
-            'property_value' => 'required|numeric',
-            'coverage_amount' => 'required|numeric',
-            'property_type' => 'required|in:detached,semi-detached,apartment,bungalow',
-            'number_of_claims' => 'nullable|integer',
-            'build_year' => 'nullable|integer',
-            'location' => 'nullable|string|max:255',
-            'quote_date' => 'nullable|date',
-            'quote_amount' => 'nullable|numeric',
-            'status' => 'nullable|in:pending,sent,expired',
-            'coverage_factor' => 'nullable|numeric',
-            'location_factor' => 'nullable|numeric',
-            'claims_factor' => 'nullable|numeric',
-            'age_factor' => 'nullable|numeric',
-            'quote_price_id' => 'nullable|exists:quote_prices,price_id',
-        ]);
+        $quoteFormData->visitor_id = auth()->id();
+        $buildYear = QuotePrice::query()->where('factor_type', 'build_year')->first()->multiplication_amount;
+        $quote_amount = $request->input('build_year') * $buildYear;
+        $quoteFormData->quote_amount = $quote_amount;
 
-        $quote->update($validatedData);
-        return response()->json($quote);
+        $quote = Quote::create($quoteFormData->toArray());
+
+        return redirect()->route('quote.show', $quote->id);
     }
 
     /**
@@ -124,43 +82,39 @@ class QuoteController extends Controller
         $quote->delete();
         return response()->json(null, 204);
     }
-
-    public function payment(Request $request, int $id)
+    public function payment(Request $request, Quote $quote)
     {
-
-        $quote = Quote::query()->where('quote_id', $id)->first();
-
         return Inertia::render('Halperninsurance/Quote/Payment', [
-            'final' => $request->final,
             'quote' => $quote,
         ]);
     }
 
-    public function storePayment(Request $request)
+    public function storePayment(Request $request, Quote $quote)
     {
-        $quoteAmount = Quote::query()->where('quote_id', 1)->first()->quote_amount;
-        $final = floor($quoteAmount);
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $qote = Quote::find($request->input('quote_id'));
 
+        $price = (int) $request->input('quote_amount');
+        $amountInCents = $price * 100;
+
+        Stripe::setApiKey(env('STRIPE_SECRET'));
         try {
-            // Create a PaymentIntent with the amount and currency
             $paymentIntent = PaymentIntent::create([
-                'amount' => $final, // Convert amount to cents
+                'amount' => $amountInCents,
                 'currency' => 'usd',
                 'payment_method' => $request->paymentMethodId,
                 'confirmation_method' => 'manual',
                 'confirm' => true,
-                'return_url' => route('quote.summary', ['quote' => 1]),
+                'return_url' => route('quote.summary', ['quote' => $qote->id]),
             ]);
 
 
-            // Check the status of the PaymentIntent
             if ($paymentIntent->status == 'succeeded') {
+
+                $qote->update(['status' => 'paid']);
                 return response()->json([
                     'success' => true,
                 ]);
             } else {
-                // Handle other statuses or errors
                 return response()->json(['error' => 'Payment failed or requires further action.']);
             }
 
@@ -172,7 +126,7 @@ class QuoteController extends Controller
     public function summary(Request $request, int $id)
     {
 
-        $quote = Quote::query()->where('quote_id', $id)->first();
+        $quote = Quote::query()->where('id', $id)->first();
 
         return Inertia::render('Halperninsurance/Quote/Summary', [
 'quote' => $quote,

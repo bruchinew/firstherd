@@ -14,7 +14,7 @@ class CreateQuotesTable extends Migration
     public function up()
     {
         Schema::create('quotes', function (Blueprint $table) {
-            $table->id('quote_id');  // Auto-incrementing primary key
+            $table->id('id');  // Auto-incrementing primary key
             $table->string('visitor_id', 255);  // Unique visitor ID for anonymous users
             $table->string('name', 255)->nullable();  // Name of the person requesting the quote
             $table->string('email', 255)->nullable();  // Email address for sending the quote

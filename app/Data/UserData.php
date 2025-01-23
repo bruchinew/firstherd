@@ -3,11 +3,11 @@
 namespace App\Data;
 
 use App\Models\User;
-use Momentum\Lock\Data\DataResource;
+use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class UserData extends DataResource
+class UserData extends Data
 {
     protected string $modelClass = User::class;
 

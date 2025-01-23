@@ -1,10 +1,10 @@
 <template>
     <AppHeader></AppHeader>
-    <QuotesHeader :quote-id="quote.quote_id"></QuotesHeader>
-
+    <QuotesHeader :quote-id="quote.id"></QuotesHeader>
     <div class="payment-form">
         <h2>Complete Your Payment</h2>
         <form @submit.prevent="handleSubmit">
+            <div><strong>Quote Price:</strong> ${{ quote.quote_amount }}</div>
             <div id="card-element">
                 <!-- A Stripe Element will be inserted here. -->
             </div>
@@ -25,7 +25,7 @@ const props = defineProps({
 });
 // Vue's ref() to hold Stripe elements and error messages
 const cardElement = ref(null);
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY); // Use the public key from the environment variables
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 const errorElement = ref(null);
 
 // Create Stripe Elements and mount them when the component is mounted
@@ -62,18 +62,23 @@ const handleSubmit = async () => {
 // Send the payment method ID to the backend for processing
 const processPayment = async (paymentMethodId) => {
     try {
-        const response = await fetch(route("quote.storepayment"), {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": document
-                    .querySelector('meta[name="csrf-token"]')
-                    .getAttribute("content"),
-            },
-            body: JSON.stringify({
-                paymentMethodId: paymentMethodId,
-            }),
-        });
+        const response = await fetch(
+            route("quote.storepayment", { quote: props.quote.id }),
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document
+                        .querySelector('meta[name="csrf-token"]')
+                        .getAttribute("content"),
+                },
+                body: JSON.stringify({
+                    paymentMethodId: paymentMethodId,
+                    quote_id: props.quote.id,
+                    quote_amount: props.quote.quote_amount,
+                }),
+            }
+        );
 
         if (!response.ok) {
             const errorText = await response.text();
@@ -85,7 +90,7 @@ const processPayment = async (paymentMethodId) => {
 
         if (data.success) {
             window.location.href = route("quote.summary", {
-                quote: props.quote.quote_id,
+                quote: props.quote.id,
             });
         } else {
             alert("Payment failed: " + data.error);
