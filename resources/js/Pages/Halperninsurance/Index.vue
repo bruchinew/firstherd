@@ -8,6 +8,7 @@
             'bg-blue-100/100': open,
         }"
     ></AppHeader>
+    <a :href="route('admin.home')">admin</a>
     <body
         :class="{
             'transition-all ease-in-out duration-300 blur-lg delay-300': open,
