@@ -31,7 +31,6 @@ class QuoteController extends Controller
         $buildYear = QuotePrice::query()->where('factor_type', 'build_year')->first()->multiplication_amount;
         $quote_amount = $request->input('build_year') * $buildYear;
         $quoteFormData->quote_amount = $quote_amount;
-
         $quote = Quote::create($quoteFormData->toArray());
 
         return redirect()->route('quote.show', $quote->id);
@@ -91,12 +90,16 @@ class QuoteController extends Controller
 
     public function storePayment(Request $request, Quote $quote)
     {
-        $qote = Quote::find($request->input('quote_id'));
+        // Find the quote by ID
+        $qote = Quote::find($request->quote_id);
 
-        $price = (int) $request->input('quote_amount');
+        // Calculate the amount in cents
+        $price = (int) $request->quote_amount;
         $amountInCents = $price * 100;
 
+        // Set the Stripe API key
         Stripe::setApiKey(env('STRIPE_SECRET'));
+
         try {
             $paymentIntent = PaymentIntent::create([
                 'amount' => $amountInCents,

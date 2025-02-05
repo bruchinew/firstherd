@@ -25,7 +25,7 @@ class UserData extends Data
             id: $user->id,
             name: $user->name,
             email: $user->email,
-            created_at: $user->created_at->toDateString(),
+            created_at: $user->created_at,
         );
     }
 }
