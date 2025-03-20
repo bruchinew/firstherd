@@ -29,7 +29,8 @@ class Quote extends Model
             'number_of_claims',
             'build_year',
             'location',
-
+            'quote_reference',
+            'policy_data',
         ];
 
 

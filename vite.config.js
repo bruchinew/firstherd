@@ -1,6 +1,8 @@
 import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
 import vue from "@vitejs/plugin-vue";
+import Components from "unplugin-vue-components/vite";
+import RekaResolver from "reka-ui/resolver";
 
 export default defineConfig({
     base: "/",
@@ -33,6 +35,10 @@ export default defineConfig({
                     includeAbsolute: false,
                 },
             },
+        }),
+        Components({
+            dts: true,
+            resolvers: [RekaResolver()],
         }),
     ],
 });

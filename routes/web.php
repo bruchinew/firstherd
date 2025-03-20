@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\AppleController;
 use App\Http\Controllers\HalperninsuranceController;
+use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\QuotePriceController;
+use App\Http\Controllers\UinsureController;
+use App\Http\Controllers\UinsureQuoteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,9 +41,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/halperninsurance/quote/{quote}/summary', [QuoteController::class, 'summary'])->name('quote.summary');
     Route::get('/halperninsurance/quote/{quote}/payment', [QuoteController::class, 'payment'])->name('quote.payment');
     Route::post('/halperninsurance/quote/{quote}/payment', [QuoteController::class, 'storePayment'])->name('quote.storepayment');
+
+
+    Route::get('/halperninsurance/uinsure/index', [UinsureQuoteController::class, 'index'])->name('uinsure-quote.index');
+    Route::post('/halperninsurance/uinsure/quote', [UinsureQuoteController::class, 'store'])->name('uinsure-quote.store');
+    Route::get('/halperninsurance/uinsure/quote', [UinsureQuoteController::class, 'address'])->name('uinsure-quote.address');
+    Route::post('/policy/create', [UinsureQuoteController::class, 'createPolicy'])->name('uinsure-quote.create');
+    Route::get('/halperninsurance/uinsure/quote/{quote}', [UinsureQuoteController::class, 'show'])->name('uinsure-quote.show');
+    Route::get('/halperninsurance/uinsure/quote/{quote}/eligibility', [UinsureQuoteController::class, 'getEligibility'])->name('uinsure-quote.get-eligibility');
+    Route::get('/halperninsurance/uinsure/quote/{quote}/summary', [UinsureQuoteController::class, 'summary'])->name('uinsure-quote.summary');
     Route::resources([
         'quote_prices' => QuotePriceController::class,
     ]);
+    //uinsure
+    Route::get('/uinsure', [PolicyController::class, 'index'])->name('uinsure.index');
+    // Route::post('/policy/client-details', [PolicyController::class, 'clientDetails'])->name('policy.client-details');
+
+    Route::post('/policy/address', [UinsureController::class, 'clientDetails'])->name('policy.client-details');
 });
 
 require __DIR__.'/auth.php';

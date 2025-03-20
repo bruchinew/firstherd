@@ -14,106 +14,129 @@
                 :actions="false"
                 @submit="handleSubmit"
             >
-                <h1>Personal Details</h1>
-                <div class="p-4 m-6 border border-black bg-gray-200 rounded-xl">
-                    <div class="justify-between grid grid-cols-3">
+                <div class="justify-center flex space-x-6">
+                    <div>
                         <FormKit
-                            v-model="form.name"
-                            type="text"
-                            name="name"
-                            label="Your name"
-                        />
-                        <FormKit
-                            v-model="form.email"
-                            type="email"
-                            name="email"
-                            label="Your email"
-                        />
-                        <FormKit
-                            v-model="form.phone"
-                            type="number"
-                            name="phone"
-                            label="Your phone number"
-                        />
-                    </div>
-                </div>
-                <h1>You Address and choice of cover</h1>
-                <div class="p-2 m-6 border border-black bg-gray-200 rounded-xl">
-                    <div class="justify-between grid grid-cols-3">
-                        <FormKit
-                            v-model="form.address"
-                            type="text"
-                            name="Address"
-                            label="Your Address"
-                            placeholder="8 Glaserton Road, London"
-                        />
-                        <FormKit
-                            v-model="form.property_value"
-                            type="number"
-                            name="property_value"
-                            label="Your property_value"
-                        />
-                        <FormKit
-                            v-model="form.coverage_amount"
-                            type="number"
-                            name="coverage_amount"
-                            label="Coverage Amount"
-                        />
-                    </div>
-                    <div class="grid grid-cols-3">
-                        <FormKit
-                            v-model="form.property_type"
-                            type="select"
-                            name="property_type"
-                            label="Property Type"
+                            v-model="form.Client1.Title"
+                            type="radio"
+                            name="client1Title"
+                            label="Title"
                             :options="[
-                                'detached',
-                                'semi-detached',
-                                'apartment',
-                                'bungalow',
+                                { value: 'Mr', label: 'Mr' },
+                                { value: 'Mrs', label: 'Mrs' },
+                                { value: 'Miss', label: 'Miss' },
+                                { value: 'Ms', label: 'Ms' },
+                            ]"
+                            validation="required"
+                        />
+                        <FormKit
+                            v-model="form.Client1.Forenames"
+                            type="text"
+                            name="client1Forenames"
+                            label="First names"
+                            placeholder="Enter your first names"
+                            validation="required"
+                        />
+                        <FormKit
+                            v-model="form.Client1.Surname"
+                            type="text"
+                            name="client1Surname"
+                            label="Last names"
+                            placeholder="Enter your last names"
+                            validation="required"
+                        />
+                        <FormKit
+                            v-model="form.Client1.DateOfBirth"
+                            type="date"
+                            name="client1DateOfBirth"
+                            label="Date of Birth"
+                            validation="required"
+                        />
+
+                        <div
+                            class="flex justify-end mt-3"
+                            v-if="!addSecondClient"
+                        >
+                            <button
+                                type="button"
+                                @click="addSecondClient = true"
+                                class="text-xs border rounded-xl p-1 border-mustard"
+                            >
+                                + Client
+                            </button>
+                        </div>
+                        <h1 class="text-lg text-mustard font-bold">
+                            How you will be contacted
+                        </h1>
+                        <FormKit
+                            v-model="form.Client1.TelephoneNumber"
+                            type="number"
+                            name="client1TelephoneNumber"
+                            label="Telephone Number"
+                            placeholder="07"
+                            validation="required"
+                        />
+                        <FormKit
+                            v-model="form.Client1.EmailAddress"
+                            type="email"
+                            name="client1Email"
+                            label="Email"
+                            placeholder="example@gmail.com"
+                            validation="required|email"
+                        />
+                        <div class="flex justify-center">
+                            <button
+                                type="submit"
+                                class="bg-mustard my-3 rounded-2xl text-sm p-2 items-center hover:bg-yellow-700"
+                            >
+                                Continue
+                            </button>
+                        </div>
+                    </div>
+
+                    <div v-if="addSecondClient">
+                        <FormKit
+                            v-model="form.Client2.Title"
+                            type="radio"
+                            name="client2Title"
+                            label="Title"
+                            :options="[
+                                { value: 'Mr', label: 'Mr' },
+                                { value: 'Mrs', label: 'Mrs' },
+                                { value: 'Miss', label: 'Miss' },
+                                { value: 'Ms', label: 'Ms' },
                             ]"
                         />
+
                         <FormKit
-                            v-model="form.number_of_claims"
-                            type="number"
-                            name="number_of_claims"
-                            label="Number of claims"
-                        />
-                        <FormKit
-                            v-model="form.build_year"
-                            type="select"
-                            name="build_year"
-                            label="Build Year"
-                            placeholder="please select..."
-                            :options="BuildYearOptions"
-                        />
-                    </div>
-                </div>
-                <div class="p-4 m-6 border border-black bg-gray-200 rounded-xl">
-                    <div class="justify-between grid grid-cols-3">
-                        <FormKit
-                            v-model="form.location"
+                            v-model="form.Client2.Forenames"
                             type="text"
-                            name="location"
-                            label="Location"
+                            name="client2Forenames"
+                            label="Client 2 Forenames"
                         />
                         <FormKit
-                            v-model="form.quote_date"
-                            type="date"
-                            name="quote_date"
-                            label="Quote Date"
+                            v-model="form.Client2.Surname"
+                            type="text"
+                            name="client2Surname"
+                            label="Client 2 Surname"
                         />
+                        <FormKit
+                            v-model="form.Client2.DateOfBirth"
+                            type="date"
+                            name="client2DateOfBirth"
+                            label="Client 2 Date of Birth"
+                        />
+
+                        <div class="flex justify-end" v-if="addSecondClient">
+                            <button
+                                type="button"
+                                @click="addSecondClient = false"
+                                class="text-xs border rounded-xl p-1 border-mustard"
+                            >
+                                - Client
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="mt-4 mr-6 flex justify-end">
-                    <button
-                        type="button"
-                        @click="submit"
-                        :disabled="!isFormComplete"
-                        class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl"
-                    >
-                        submit
-                    </button>
                 </div>
             </FormKit>
             <div v-if="submitted">
@@ -125,51 +148,36 @@
 
 <script setup>
 import AppHeader from "@/Components/UI/AppHeader.vue";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 import QuotesHeader from "@/Components/QuotesHeader.vue";
 
 const quoteId = ref(1);
 const submitted = ref(false);
+const addSecondClient = ref(false);
 
 const handleSubmit = () => {
     submitted.value = true;
+
+    form.post(route("uinsure-quote.store"), {});
 };
-const FormFilled = () => {
-    return true;
-};
-const BuildYearOptions = [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800];
 
 const form = useForm({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    property_value: "",
-    coverage_amount: "",
-    property_type: "",
-    number_of_claims: "",
-    build_year: "",
-    location: "",
-    quote_date: "",
+    Client1: {
+        Title: "",
+        Forenames: "",
+        Surname: "",
+        DateOfBirth: "",
+        TelephoneNumber: "",
+        EmailAddress: "",
+    },
+    // Client2: {
+    //     Title: "",
+    //     Forenames: "",
+    //     Surname: "",
+    //     DateOfBirth: "",
+    // },
 });
-
-const isFormComplete = computed(() => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(form.email);
-});
-
-const submit = () => {
-    console.log("Submitting form...");
-    form.post(route("quote.store", form), {
-        onSuccess: () => {
-            console.log("Form submitted successfully");
-        },
-        onError: () => {
-            console.log("Form submission failed");
-        },
-    });
-};
 </script>
 
 <style scoped>
