@@ -6,6 +6,7 @@ use App\Models\Quote;
 use App\Services\UinsureApiService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 class UinsureQuoteController extends Controller
 {
@@ -76,25 +77,26 @@ class UinsureQuoteController extends Controller
         ]);
     }
 
-    public function getEligibility(Request $request, $quoteReference)
+    public function getEligibility(Request $request, $quoteReference, $selectedPremiumId)
     {
+        $quote = Quote::where('quote_reference', $quoteReference)->firstOrFail();
+        $quote->selected_premium_id = $selectedPremiumId;
+        $quote->save();
+
         $eligibility = $this->uinsureApiService->getEligibility($quoteReference);
         return Inertia::render('Halperninsurance/Uinsure/Eligibility', [
                     'eligibility' => $eligibility,
                     'quote_reference' => $quoteReference,
                 ]);
     }
-
-    public function summary(Request $request, $quoteId)
+    public function summary(Request $request, $quote)
     {
-
-        $quote = Quote::where('quote_reference', $quoteId)->firstOrFail();
-        $confirmedEligibility = $this->uinsureApiService->getIllustration($quote);
+        $fullquote = Quote::where('quote_reference', $quote)->firstOrFail();
+        $confirmedEligibility = $this->uinsureApiService->getIllustration($fullquote);
         return Inertia::render('Halperninsurance/Uinsure/Summary', [
-            'policy' => $quote,
+            'quote' => $fullquote,
         ]);
     }
-
 
 
 }

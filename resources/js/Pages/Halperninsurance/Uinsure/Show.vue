@@ -111,14 +111,15 @@
                     </button>
                     <a
                         :href="
-                            route(
-                                'uinsure-quote.get-eligibility',
-                                policy.quote_reference
-                            )
+                            route('uinsure-quote.get-eligibility', {
+                                quote: policy.quote_reference,
+                                selectedPremiumId: selectedPremiumId,
+                            })
                         "
                     >
                         <button class="border rounded-xl p-2 bg-white">
                             Continue
+                            {{ selectedPremiumId }}
                         </button>
                     </a>
                 </div>
@@ -164,6 +165,7 @@
                     <tr
                         v-for="item in policyData.PremiumListItems"
                         :key="item.PremiumId"
+                        @click="selectedPremiumId = item.PremiumId"
                     >
                         <td
                             class="border px-4 py-2"
@@ -235,7 +237,7 @@ const props = defineProps({
         required: true,
     },
 });
-const age = ref(18);
+const selectedPremiumId = ref(0);
 const policyData = JSON.parse(props.policy.policy_data);
 const formatDate = (dateString: string) => {
     const timestamp = parseInt(

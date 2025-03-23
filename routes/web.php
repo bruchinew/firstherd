@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/halperninsurance/uinsure/quote', [UinsureQuoteController::class, 'address'])->name('uinsure-quote.address');
     Route::post('/policy/create', [UinsureQuoteController::class, 'createPolicy'])->name('uinsure-quote.create');
     Route::get('/halperninsurance/uinsure/quote/{quote}', [UinsureQuoteController::class, 'show'])->name('uinsure-quote.show');
-    Route::get('/halperninsurance/uinsure/quote/{quote}/eligibility', [UinsureQuoteController::class, 'getEligibility'])->name('uinsure-quote.get-eligibility');
+    Route::get('/halperninsurance/uinsure/quote/{quote}/eligibility/{selectedPremiumId}', [UinsureQuoteController::class, 'getEligibility'])->name('uinsure-quote.get-eligibility');
     Route::get('/halperninsurance/uinsure/quote/{quote}/summary', [UinsureQuoteController::class, 'summary'])->name('uinsure-quote.summary');
     Route::resources([
         'quote_prices' => QuotePriceController::class,

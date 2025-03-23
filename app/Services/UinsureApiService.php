@@ -135,31 +135,50 @@ class UinsureApiService
 
     public function getIllustration($policyId)
     {
+        // Decode the policy_data JSON
         $policyData = json_decode($policyId->policy_data, true);
 
+        // Set the ExpiryDate (example: 30 days from now)
+        $expiryDate = now()->addDays(30)->format('Y-m-d\TH:i:s');
+
+        // Prepare the request payload
+        $payload = [
+            'APIKey' => $this->apiKey,
+            'PolicyNumber' => $policyId->quote_reference,
+            'AgreeDeclarations' => true,
+            'IncludeFamilyLegalProtection' => false, // Set to true if needed
+            'IncludeHomeEmergencyCover' => false, // Set to true if needed
+            'IncludeHomeEmergencyCoverPlus' => false, // Set to true if needed
+            'SelectedPremiumId' => $policyId->selected_premium_id,
+            'ExpiryDate' => $expiryDate, // Include the ExpiryDate in the payload
+        ];
+
         try {
-            $url = $this->baseUrl . "/bc/{$policyId}/illustration";
+            $url = $this->baseUrl . "/bc/{$policyId->quote_reference}/illustration";
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $this->apiKey,
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ])
             ->withoutVerifying()  // Disable SSL certificate verification
-            ->post($url, ['APIKey' => $this->apiKey,'PolicyNumber' => $policyId->quote_reference,
-        'AgreeDeclarations' => true,'SelectedPremiumId' => $policyData['SelectedPremiumId']]); // Use POST request with APIKey in the body
+            ->post($url, $payload); // Use POST request with the payload
 
-            dd($response->json());
             if ($response->successful()) {
+                // Save the ExpiryDate in the quote_date column
+                $quote = Quote::where('quote_reference', $policyId->quote_reference)->firstOrFail();
+                $quote->quote_date = $expiryDate;
+                $quote->save();
+
                 return $response->json();
             }
+
+            // Return error if the request failed
+            return ['error' => 'API request failed', 'message' => $response->body()];
 
         } catch (Exception $e) {
             return ['error' => 'Exception occurred', 'message' => $e->getMessage()];
         }
     }
-
-
-
 
     public function getLink($policyId)
     {

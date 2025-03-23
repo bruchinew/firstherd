@@ -82,12 +82,12 @@
                 </div>
             </div>
         </div>
-        <a :href="route('uinsure-quote.summary', quote_reference)">
+        <a :href="route('uinsure-quote.summary', { quote: quote_reference })">
             <button
                 class="bg-blue-500 text-white px-4 py-2 rounded mt-8"
                 :class="{ 'opacity-50': !allAgreed }"
-                :disabled="!allAgreed"
             >
+                <!-- :disabled="!allAgreed" -->
                 Continue
             </button>
         </a>

@@ -13,7 +13,7 @@ export default {
     methods: {
         loadGoogleScript() {
             const script = document.createElement("script");
-            script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBidS63V9g0VrCb6Ki9ZlXy8FjzJFN_w8s&libraries=places`;
+            script.src = `https://maps.googleapis.com/maps/api/js&libraries=places`;
             script.async = true;
             script.onload = this.initAutocomplete;
             document.head.appendChild(script);
